@@ -47,7 +47,11 @@ const Levels: React.FC = () => {
         
         <div className="cyber-panel p-6 rounded-lg mb-10">
           <div className="flex items-center mb-4">
+<<<<<<< HEAD
             <span className="text-cyber-neon-green mr-2">{'>'}</span>
+=======
+            <span className="text-cyber-neon-green mr-2"></span>
+>>>>>>> 80a52d5 (changes)
             <h2 className="neon-text text-xl">MISSION TIMELINE</h2>
           </div>
           

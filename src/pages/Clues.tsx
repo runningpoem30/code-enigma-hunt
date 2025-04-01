@@ -35,7 +35,7 @@ const Clues: React.FC = () => {
         
         <div className="cyber-panel p-6 rounded-lg mb-10">
           <div className="flex items-center mb-4">
-            <span className="text-cyber-neon-green mr-2">{'>'}</span>
+            <span className="text-cyber-neon-green mr-2">></span>
             <h2 className="neon-text-pink text-xl">ENIGMA CLUE DATABASE</h2>
           </div>
           

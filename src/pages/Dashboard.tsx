@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
           <div className="flex items-center mb-4">
             <Terminal className="text-cyber-neon-blue w-8 h-8 mr-2" />
             <h1 className="neon-text text-4xl sm:text-5xl font-bold tracking-tighter">
-              <GlitchText text="THE LOST CODE OF ENIGMA" glitchInterval={3000} />
+              <GlitchText text="CODE CONSPIRACY" glitchInterval={3000} />
             </h1>
           </div>
           
@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
         
         <div className="cyber-panel p-6 rounded-md mb-6">
           <div className="flex items-center mb-4">
-            <span className="text-cyber-neon-green mr-2">{'>'}</span>
+            <span className="text-cyber-neon-green mr-2"></span>
             <h2 className="neon-text-pink text-xl">MISSION BRIEFING</h2>
           </div>
           
