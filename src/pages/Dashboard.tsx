@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MatrixBackground from '@/components/MatrixBackground';
@@ -83,15 +82,7 @@ const Dashboard: React.FC = () => {
           <div className="text-gray-300 mb-6 h-40 overflow-y-auto">
             {showBrief ? (
               <TypingText
-                text={`TOP SECRET: For your eyes only, Agent.
-
-A series of encrypted messages has been intercepted from an unknown source. These messages are believed to contain critical information about "The Lost Code of Enigma", a legendary encryption algorithm thought to be unbreakable.
-
-Your mission: Debug the corrupted code fragments we've managed to recover. Each fragment contains hidden clues that, when assembled, will reveal the location of the Lost Code.
-
-Be cautious, Agent. As you advance, the encryption complexity will increase.
-
-Time is of the essence. The future of global cybersecurity depends on your programming skills.
+                text={`Your mission: Debug the corrupted code fragments we've managed to recover. 
 
 Good luck.`}
                 speed={20}
@@ -126,10 +117,9 @@ Good luck.`}
       
       <footer className="fixed bottom-4 text-sm text-gray-500 z-10">
         <div className="flex gap-2">
-          <span className="neon-text-blue">// System: </span>
-          <span>Debug_Mode=true</span>
-          <span>Security_Protocol=active</span>
-          <span>Version=1.0.0</span>
+          <span className="neon-text-blue"></span>
+          <span className='text-[64px]'>ASE : Advance Coding Club , NMIT</span>
+
         </div>
       </footer>
     </div>
