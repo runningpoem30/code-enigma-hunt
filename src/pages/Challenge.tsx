@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import MatrixBackground from '@/components/MatrixBackground';
@@ -62,12 +61,20 @@ const Challenge: React.FC = () => {
     
     if (!level) return;
     
-    // In a real app, we would run the Python code on a server or use a JS interpreter
-    // For this demo, we'll simulate it by checking if the code matches the solution
-    
+    // Improved code comparison logic
     setTimeout(() => {
-      const normalizedCode = code.replace(/\s+/g, '');
-      const normalizedSolution = level.solution.replace(/\s+/g, '');
+      // Normalize both the user code and solution by removing whitespace and comments
+      const normalizeCode = (codeStr: string) => {
+        return codeStr
+          .replace(/\s+/g, '') // Remove all whitespace
+          .replace(/#.*$/gm, ''); // Remove Python comments
+      };
+      
+      const normalizedCode = normalizeCode(code);
+      const normalizedSolution = normalizeCode(level.solution);
+      
+      console.log("User code:", normalizedCode);
+      console.log("Solution:", normalizedSolution);
       
       if (normalizedCode === normalizedSolution) {
         // Success!
@@ -134,7 +141,7 @@ const Challenge: React.FC = () => {
           </CyberButton>
           
           <h1 className="neon-text text-2xl sm:text-3xl font-bold">
-            Level {level.id}: {level.title}
+            Level {level?.id}: {level?.title}
           </h1>
           
           <div className="cyber-border px-4 py-2 rounded-md flex items-center">
@@ -147,9 +154,9 @@ const Challenge: React.FC = () => {
           {/* Left panel - Challenge description */}
           <div className="cyber-panel p-6 rounded-lg">
             <h2 className="neon-text-pink text-xl mb-4">Mission Details</h2>
-            <p className="text-gray-300 mb-6">{level.description}</p>
+            <p className="text-gray-300 mb-6">{level?.description}</p>
             
-            {showHint && (
+            {showHint && level && (
               <div className="bg-cyber-dark-purple/50 p-4 rounded-md mb-4 border border-cyber-neon-purple">
                 <h3 className="text-cyber-neon-purple mb-2 flex items-center">
                   <Lightbulb className="w-4 h-4 mr-2" />
@@ -159,7 +166,7 @@ const Challenge: React.FC = () => {
               </div>
             )}
             
-            {isCorrect && showClue && (
+            {isCorrect && showClue && level && (
               <div className="bg-cyber-dark-blue/50 p-4 rounded-md border border-cyber-neon-green animate-fade-in">
                 <h3 className="text-cyber-neon-green mb-2 flex items-center">
                   <Award className="w-4 h-4 mr-2" />
@@ -218,8 +225,8 @@ const Challenge: React.FC = () => {
             </div>
             
             <CodeEditor
-              initialCode={level.initialCode}
-              solution={level.solution}
+              initialCode={level?.initialCode || ''}
+              solution={level?.solution || ''}
               onChange={handleCodeChange}
             />
             

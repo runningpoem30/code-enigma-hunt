@@ -35,9 +35,16 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
     setCode(newCode);
     onChange && onChange(newCode);
     
-    // Check if the code matches the solution (simplified for demo)
-    const normalizedCode = newCode.replace(/\s+/g, '');
-    const normalizedSolution = solution.replace(/\s+/g, '');
+    // Improved solution checking logic
+    // Remove whitespace and comments to compare only the functional code
+    const normalizeCode = (codeStr: string) => {
+      return codeStr
+        .replace(/\s+/g, '') // Remove all whitespace
+        .replace(/#.*$/gm, ''); // Remove Python comments
+    };
+    
+    const normalizedCode = normalizeCode(newCode);
+    const normalizedSolution = normalizeCode(solution);
     setIsSolved(normalizedCode === normalizedSolution);
   };
 
