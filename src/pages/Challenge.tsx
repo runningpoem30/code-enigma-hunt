@@ -33,7 +33,6 @@ const Challenge: React.FC = () => {
       return;
     }
     
-    // Make sure we set the code when level changes
     setCode(level.initialCode || '');
     setOutput(null);
     setShowHint(false);
@@ -43,100 +42,92 @@ const Challenge: React.FC = () => {
   
   const handleCodeChange = (newCode: string) => {
     setCode(newCode);
-    
-    // Reset when code changes
     if (isCorrect) {
       setIsCorrect(false);
       setShowClue(false);
     }
   };
-  
+
+  // Improved code normalization that preserves logic but ignores style
+  const normalizeCode = (codeStr: string) => {
+    return codeStr
+      .replace(/#.*$/gm, '')        // Remove comments
+      .replace(/""".*?"""/gs, '')   // Remove multi-line comments
+      .replace(/\s+/g, ' ')         // Collapse whitespace
+      .replace(/\s*([=+\-*/])\s*/g, '$1')  // Normalize operators
+      .trim();
+  };
+
+  // Special validation for specific levels
+  const validateSpecialCases = (code: string, levelId: number) => {
+    switch(levelId) {
+      case 1:  // String reversal
+        return code.includes('text[i]+reversed') || 
+               code.includes('text[i] + reversed');
+      case 2:  // Digit sum
+        return code.includes('result+=digit') || 
+               code.includes('result += digit');
+      case 5:  // Recursive
+        return code.includes('+recursive_code(n-2)') || 
+               code.includes('+ recursive_code(n-2)');
+      default:
+        return false;
+    }
+  };
+
   const handleRunCode = () => {
-    // Play sound effect
     const keyboardSound = new Audio('/keyboard.mp3');
     keyboardSound.volume = 0.2;
-    keyboardSound.play().catch(() => {
-      // Silent error for browsers that block autoplay
-    });
-    
+    keyboardSound.play().catch(() => {});
+
     if (!level) return;
-    
-    // Further improved code comparison logic with better debugging
+
     setTimeout(() => {
-      // Normalize both the user code and solution by removing whitespace, comments and quote variations
-      const normalizeCode = (codeStr: string) => {
-        return codeStr
-          .replace(/\s+/g, '') // Remove all whitespace
-          .replace(/#.*$/gm, '') // Remove Python comments
-          .replace(/['"`]/g, ''); // Remove quote characters that might differ
-      };
-      
+      // First check special cases
+      if (validateSpecialCases(code, level.id)) {
+        handleSuccess();
+        return;
+      }
+
+      // Then try normalized comparison
       const normalizedCode = normalizeCode(code);
       const normalizedSolution = normalizeCode(level.solution);
-      
-      console.log("Level:", level.id, level.title);
-      console.log("Normalized user code:", normalizedCode);
-      console.log("Normalized solution:", normalizedSolution);
-      console.log("Match:", normalizedCode === normalizedSolution);
-      
-      // Additional check: look for the key operations that need to be fixed
-      if (level.id === 5) {
-        // For Level 5, check if they changed the - to +
-        const hasAddition = code.includes("return recursive_code(n-1) + recursive_code(n-2)");
-        console.log("Contains correct recursive formula:", hasAddition);
-        if (hasAddition) {
-          // Force success for level 5 if they have the correct formula
-          setOutput({
-            type: 'success',
-            message: `Execution successful!\n\nOutput:\n${level.clue}`
-          });
-          setIsCorrect(true);
-          completeLevel(level.id);
-          addClue(level.id, level.clue);
-          toast({
-            title: "Code Debugged Successfully!",
-            description: `You've unlocked clue #${level.id}`,
-          });
-          return;
-        }
-      }
-      
+
       if (normalizedCode === normalizedSolution) {
-        // Success!
-        setOutput({
-          type: 'success',
-          message: `Execution successful!\n\nOutput:\n${level.clue}`
-        });
-        setIsCorrect(true);
-        
-        // Play success sound
-        const successSound = new Audio('/success.mp3');
-        successSound.volume = 0.3;
-        successSound.play().catch(() => {});
-        
-        // Mark level as completed
-        completeLevel(level.id);
-        addClue(level.id, level.clue);
-        
-        toast({
-          title: "Code Debugged Successfully!",
-          description: `You've unlocked clue #${level.id}`,
-        });
+        handleSuccess();
       } else {
-        // Provide feedback based on code similarity
-        setOutput({
-          type: 'error',
-          message: 'Execution failed!\n\nError: Code still contains bugs. Try again.'
-        });
-        
-        // Play error sound
-        const errorSound = new Audio('/error.mp3');
-        errorSound.volume = 0.2;
-        errorSound.play().catch(() => {});
+        handleFailure();
       }
     }, 1000);
   };
-  
+
+  const handleSuccess = () => {
+    if (!level) return;
+    
+    setOutput({
+      type: 'success',
+      message: `Execution successful!\n\nOutput:\n${level.clue}`
+    });
+    setIsCorrect(true);
+
+    new Audio('/success.mp3').play().catch(() => {});
+    completeLevel(level.id);
+    addClue(level.id, level.clue);
+
+    toast({
+      title: "Code Debugged Successfully!",
+      description: `You've unlocked clue #${level.id}`,
+    });
+  };
+
+  const handleFailure = () => {
+    setOutput({
+      type: 'error',
+      message: 'Execution failed!\n\nError: Code still contains bugs. Try again.'
+    });
+    new Audio('/error.mp3').play().catch(() => {});
+  };
+
   const handleNextLevel = () => {
     if (!level) return;
     
@@ -176,7 +167,6 @@ const Challenge: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left panel - Challenge description */}
           <div className="cyber-panel p-6 rounded-lg">
             <h2 className="neon-text-pink text-xl mb-4">Mission Details</h2>
             <p className="text-gray-300 mb-6">{level?.description}</p>
@@ -240,7 +230,6 @@ const Challenge: React.FC = () => {
             </div>
           </div>
           
-          {/* Middle panel - Code editor */}
           <div className="lg:col-span-2">
             <div className="mb-4 flex justify-end">
               <CyberButton onClick={handleRunCode}>
