@@ -21,6 +21,11 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   const [isSolved, setIsSolved] = useState(false);
   const [lines, setLines] = useState<string[]>([]);
 
+  // Re-initialize the code when initialCode prop changes
+  useEffect(() => {
+    setCode(initialCode);
+  }, [initialCode]);
+
   useEffect(() => {
     setLines(code.split("\n"));
   }, [code]);
@@ -88,7 +93,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
               className="w-full bg-transparent text-cyber-neon-green font-mono pl-10 outline-none resize-none"
               spellCheck={false}
               readOnly={readOnly}
-              rows={lines.length}
+              rows={Math.max(10, lines.length)} // Ensure minimum height
               style={{ minHeight: "200px" }}
             />
           </div>

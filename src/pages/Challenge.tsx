@@ -20,7 +20,7 @@ const Challenge: React.FC = () => {
   const { toast } = useToast();
   const { gameState, completeLevel, addClue } = useGameState();
   
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState<string>('');
   const [output, setOutput] = useState<OutputResult | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [showClue, setShowClue] = useState(false);
@@ -34,7 +34,8 @@ const Challenge: React.FC = () => {
       return;
     }
     
-    setCode(level.initialCode);
+    // Make sure we set the code when level changes
+    setCode(level.initialCode || '');
     setOutput(null);
     setShowHint(false);
     setShowClue(false);
@@ -217,7 +218,7 @@ const Challenge: React.FC = () => {
             </div>
             
             <CodeEditor
-              initialCode={code}
+              initialCode={level.initialCode}
               solution={level.solution}
               onChange={handleCodeChange}
             />
