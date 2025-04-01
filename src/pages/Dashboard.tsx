@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
         
         <div className="cyber-panel p-6 rounded-md mb-6">
           <div className="flex items-center mb-4">
-            <span className="text-cyber-neon-green mr-2">></span>
+            <span className="text-cyber-neon-green mr-2">{'>'}</span>
             <h2 className="neon-text-pink text-xl">MISSION BRIEFING</h2>
           </div>
           
