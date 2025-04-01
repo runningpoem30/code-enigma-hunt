@@ -1,101 +1,258 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 300 100% 50%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 120 100% 50%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.75rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border selection:bg-white/10 selection:text-white;
+  }
+  
+  body {
+    @apply bg-cyber-dark-blue text-foreground antialiased;
+    font-family: 'Share Tech Mono', monospace;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cyber-border {
+    @apply border border-cyber-neon-blue shadow-[0_0_5px_rgba(0,255,255,0.7),_0_0_10px_rgba(0,255,255,0.5)];
+  }
+
+  .cyber-panel {
+    @apply bg-cyber-dark-blue/90 border border-cyber-neon-blue shadow-[0_0_5px_rgba(0,255,255,0.7),_0_0_10px_rgba(0,255,255,0.5)];
+    backdrop-filter: blur(10px);
+  }
+  
+  .neon-text {
+    @apply text-cyber-neon-blue;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+  
+  .neon-text-pink {
+    @apply text-cyber-neon-pink;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.7), 0 0 10px rgba(255, 0, 255, 0.5);
+  }
+  
+  .neon-text-green {
+    @apply text-cyber-neon-green;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.7), 0 0 10px rgba(57, 255, 20, 0.5);
+  }
+
+  .neon-text-purple {
+    @apply text-cyber-neon-purple;
+    text-shadow: 0 0 5px rgba(157, 0, 255, 0.7), 0 0 10px rgba(157, 0, 255, 0.5);
+  }
+
+  .neon-text-yellow {
+    @apply text-cyber-neon-yellow;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.5);
+  }
+
+  .matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .matrix-column {
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    color: #0f0;
+    font-size: 20px;
+    opacity: 0.8;
+  }
+
+  .cyber-grid {
+    background-size: 50px 50px;
+    @apply bg-cyber-grid;
+  }
+
+  .typing-container {
+    @apply overflow-hidden whitespace-nowrap;
+  }
+
+  .typing-text {
+    @apply inline-block overflow-hidden whitespace-nowrap border-r-2 border-cyber-neon-blue animate-typing animate-blink-caret;
+  }
+
+  .code-editor {
+    @apply font-cyber text-sm bg-cyber-dark-purple p-4 overflow-auto rounded-md;
+    line-height: 1.5;
+  }
+
+  .code-line {
+    @apply flex;
+  }
+
+  .line-number {
+    @apply text-gray-500 mr-4 select-none;
+    user-select: none;
+  }
+
+  .cyberpunk-button {
+    @apply relative overflow-hidden px-6 py-3 bg-transparent text-cyber-neon-blue border border-cyber-neon-blue rounded-md transition-all duration-300 hover:bg-cyber-neon-blue/10 active:bg-cyber-neon-blue/20 focus:outline-none;
+  }
+
+  .cyberpunk-button:before {
+    content: "";
+    @apply absolute inset-0 w-0 bg-cyber-neon-blue/20 transition-all duration-500 ease-out;
+  }
+
+  .cyberpunk-button:hover:before {
+    @apply w-full;
+  }
+
+  .cyberpunk-button-pink {
+    @apply relative overflow-hidden px-6 py-3 bg-transparent text-cyber-neon-pink border border-cyber-neon-pink rounded-md transition-all duration-300 hover:bg-cyber-neon-pink/10 active:bg-cyber-neon-pink/20 focus:outline-none;
+  }
+
+  .cyberpunk-button-pink:before {
+    content: "";
+    @apply absolute inset-0 w-0 bg-cyber-neon-pink/20 transition-all duration-500 ease-out;
+  }
+
+  .cyberpunk-button-pink:hover:before {
+    @apply w-full;
+  }
+
+  .cyberpunk-button-green {
+    @apply relative overflow-hidden px-6 py-3 bg-transparent text-cyber-neon-green border border-cyber-neon-green rounded-md transition-all duration-300 hover:bg-cyber-neon-green/10 active:bg-cyber-neon-green/20 focus:outline-none;
+  }
+
+  .cyberpunk-button-green:before {
+    content: "";
+    @apply absolute inset-0 w-0 bg-cyber-neon-green/20 transition-all duration-500 ease-out;
+  }
+
+  .cyberpunk-button-green:hover:before {
+    @apply w-full;
+  }
+
+  .glitch-effect {
+    position: relative;
+    animation: glitch 0.5s infinite;
+  }
+
+  .glitch-effect::before,
+  .glitch-effect::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-effect::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+  }
+
+  .glitch-effect::after {
+    left: -2px;
+    text-shadow: 2px 0 #00ffff;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim2 2.5s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-anim {
+    0% {
+      clip: rect(98px, 9999px, 31px, 0);
+    }
+    25% {
+      clip: rect(120px, 9999px, 39px, 0);
+    }
+    50% {
+      clip: rect(68px, 9999px, 7px, 0);
+    }
+    75% {
+      clip: rect(24px, 9999px, 13px, 0);
+    }
+    100% {
+      clip: rect(67px, 9999px, 63px, 0);
+    }
+  }
+
+  @keyframes glitch-anim2 {
+    0% {
+      clip: rect(18px, 9999px, 15px, 0);
+    }
+    25% {
+      clip: rect(102px, 9999px, 80px, 0);
+    }
+    50% {
+      clip: rect(46px, 9999px, 54px, 0);
+    }
+    75% {
+      clip: rect(53px, 9999px, 10px, 0);
+    }
+    100% {
+      clip: rect(23px, 9999px, 5px, 0);
+    }
+  }
+}
+
+.scan-line {
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.2), transparent);
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 5px;
+  animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: -5px;
+  }
+  100% {
+    top: 100%;
   }
 }
