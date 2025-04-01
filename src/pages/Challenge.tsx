@@ -61,20 +61,45 @@ const Challenge: React.FC = () => {
     
     if (!level) return;
     
-    // Improved code comparison logic
+    // Further improved code comparison logic with better debugging
     setTimeout(() => {
-      // Normalize both the user code and solution by removing whitespace and comments
+      // Normalize both the user code and solution by removing whitespace, comments and quote variations
       const normalizeCode = (codeStr: string) => {
         return codeStr
           .replace(/\s+/g, '') // Remove all whitespace
-          .replace(/#.*$/gm, ''); // Remove Python comments
+          .replace(/#.*$/gm, '') // Remove Python comments
+          .replace(/['"`]/g, ''); // Remove quote characters that might differ
       };
       
       const normalizedCode = normalizeCode(code);
       const normalizedSolution = normalizeCode(level.solution);
       
-      console.log("User code:", normalizedCode);
-      console.log("Solution:", normalizedSolution);
+      console.log("Level:", level.id, level.title);
+      console.log("Normalized user code:", normalizedCode);
+      console.log("Normalized solution:", normalizedSolution);
+      console.log("Match:", normalizedCode === normalizedSolution);
+      
+      // Additional check: look for the key operations that need to be fixed
+      if (level.id === 5) {
+        // For Level 5, check if they changed the - to +
+        const hasAddition = code.includes("return recursive_code(n-1) + recursive_code(n-2)");
+        console.log("Contains correct recursive formula:", hasAddition);
+        if (hasAddition) {
+          // Force success for level 5 if they have the correct formula
+          setOutput({
+            type: 'success',
+            message: `Execution successful!\n\nOutput:\n${level.clue}`
+          });
+          setIsCorrect(true);
+          completeLevel(level.id);
+          addClue(level.id, level.clue);
+          toast({
+            title: "Code Debugged Successfully!",
+            description: `You've unlocked clue #${level.id}`,
+          });
+          return;
+        }
+      }
       
       if (normalizedCode === normalizedSolution) {
         // Success!

@@ -35,16 +35,23 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
     setCode(newCode);
     onChange && onChange(newCode);
     
-    // Improved solution checking logic
-    // Remove whitespace and comments to compare only the functional code
+    // Even more improved solution checking logic
+    // Remove whitespace, comments, and ensure we handle special characters consistently
     const normalizeCode = (codeStr: string) => {
       return codeStr
         .replace(/\s+/g, '') // Remove all whitespace
-        .replace(/#.*$/gm, ''); // Remove Python comments
+        .replace(/#.*$/gm, '') // Remove Python comments
+        .replace(/['"`]/g, ''); // Remove quote characters that might differ
     };
     
     const normalizedCode = normalizeCode(newCode);
     const normalizedSolution = normalizeCode(solution);
+    
+    // For debugging
+    if (normalizedCode === normalizedSolution) {
+      console.log("Code matches solution!");
+    }
+    
     setIsSolved(normalizedCode === normalizedSolution);
   };
 
