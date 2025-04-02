@@ -96,7 +96,7 @@ const Clues: React.FC = () => {
               <h3 className={`text-xl ${
                 allLevelsCompleted ? 'neon-text-green' : 'text-gray-400'
               }`}>
-                The Lost Code of ENIGMA
+                Code Conspiracy
               </h3>
             </div>
             
