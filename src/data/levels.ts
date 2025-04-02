@@ -9,7 +9,7 @@ export const levels: Level[] = [
     initialCode: `def reverse_string(text):
     reversed = ""
     for i in range(len(text)):
-        reversed = reversed + text[i]  # Bug: Should prepend, not append
+        reversed = reversed + text[i] 
     return reversed
 
 encrypted = "ENIGMA"
@@ -35,7 +35,7 @@ print("First clue:", decrypted) `,
     result = 0
     while number > 0:
         digit = number % 10
-        result -= digit  # Bug: Subtracting instead of adding
+        result -= digit  
         number = number // 10
     return result
 
@@ -120,7 +120,7 @@ print("Fourth clue:", message)  # Output: "HIDDEN"`,
     initialCode: `def recursive_code(n):
     if n <= 1:
         return 1
-    return recursive_code(n-1) - recursive_code(n-2)  # Bug: Should be "+"
+    return recursive_code(n-1) - recursive_code(n-2)  
 
 result = recursive_code(7)
 print("Fifth clue:", chr(result + 64))  # Output: Invalid (Wrong)`,
@@ -168,7 +168,7 @@ print("Sixth clue:", message)  # Output: "ESCAPE"`,
     title: "Binary Secrets",
     description: "Fix the binary conversion function that's producing incorrect results.",
     initialCode: `def binary_to_letter(binary_string):
-    num = int(binary_string, 10)  # Bug: Uses base-10 instead of base-2
+    num = int(binary_string, 10)  
     return chr(num)  # Returns garbage (e.g., "1000101" → 1,000,101)
 
 binary_code = "1000101"
