@@ -36,7 +36,7 @@ const Clues: React.FC = () => {
         <div className="cyber-panel p-6 rounded-lg mb-10">
           <div className="flex items-center mb-4">
             <span className="text-cyber-neon-green mr-2"></span>
-            <h2 className="neon-text-pink text-xl">ENIGMA CLUE DATABASE</h2>
+            <h2 className="neon-text-pink text-xl">CLUE DATABASE</h2>
           </div>
           
           <p className="text-gray-300 mb-6">
@@ -103,11 +103,11 @@ const Clues: React.FC = () => {
             {allLevelsCompleted ? (
               <div className="animate-fade-in">
                 <p className="text-gray-300 mb-4">
-                  Congratulations! You've successfully recovered all clues and revealed the lost code of ENIGMA.
+                  Congratulations! You've successfully recovered all clues .
                 </p>
                 <div className="cyber-border p-4 rounded-md bg-cyber-dark-blue/50 text-center mb-6">
                   <span className="neon-text-green font-mono text-2xl tracking-widest">
-                    THEENIGMACODEISHERE
+                    THELEGACYCODEISHERE
                   </span>
                 </div>
                 <p className="text-cyber-neon-blue text-center">

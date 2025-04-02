@@ -249,7 +249,7 @@ print("Ninth clue:", lock.get_hint())  # Output: "KEY"`,
   {
     id: 10,
     title: "Unlock the Lost Code",
-    description: "Use all collected clues to solve the final encryption and reveal the lost code of ENIGMA.",
+    description: "Use all collected clues to solve the final encryption and reveal the lost code of LEGACY.",
     initialCode: `# Use all collected clues to decode the final message
 # CLUE 1: AMGINE
 # CLUE 2: T
@@ -275,7 +275,7 @@ def decode_final_message(key, encrypted):
 key = "SECRET"  # Placeholder (player should use "THEMKEY")
 encrypted = "WKLVCODEGMXVWDKHDG"
 final_message = decode_final_message(key, encrypted)
-print("The Lost Code of ENIGMA:", final_message)  # Output: Garbage (as intended)`,
+print("The Lost Code of LEGACY:", final_message)  # Output: Garbage (as intended)`,
     solution: `def decode_final_message(key, encrypted):
     decrypted = ""
     for i in range(len(encrypted)):
@@ -290,8 +290,8 @@ print("The Lost Code of ENIGMA:", final_message)  # Output: Garbage (as intended
 # Key derived from clues: T (L2) + M (L5) + E (L7) + KEY (L9) = "THEMKEY"
 encrypted = "WKLVCODEGMXVWDKHDG"
 final_message = decode_final_message("THEMKEY", encrypted)
-print("The Lost Code of ENIGMA:", final_message)  # Output: "THEENIGMACODEISHERE"`,
+print("The Lost Code of LEGACY:", final_message)  # Output: "THELEGACYCODEISHERE"`,
     hint: "Look for patterns in the clues - some might form words or keys. For a Caesar-like cipher, you'll need to shift each letter by the corresponding value in the key.",
-    clue: "THEENIGMACODEISHERE",
-  }
+    clue: "THELEGACYCODEISHERE",
+}
 ];
