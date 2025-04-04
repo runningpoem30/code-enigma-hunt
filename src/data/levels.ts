@@ -189,7 +189,7 @@ print("Seventh clue:", letter)  # Output: "E" (69 in binary)`,
     title: "Dict Detective",
     description: "Fix the dictionary manipulation function that's losing data.",
     initialCode: ` def merge_clues(dict1, dict2):
-    result = dict1  # BUG: Doesn't copy, just aliases!
+    result = dict1  
     for key in dict2:
         result[key] = dict2[key]  # Mutates dict1 through alias
     return result
@@ -210,7 +210,7 @@ second_part = {"middle": "E", "end": "A"}
 merged = merge_clues(first_part, second_part)
 print("Eighth clue:", merged["start"] + merged["middle"] + merged["end"]) 
 # Output: "BEA" (first_part remains unchanged)`,
-    hint: "The function is modifying dict1 directly and overwriting values. How might we preserve the original values of dict1 when they matter?",
+    hint: "The function is modifying dict1 directly and overwriting values. How might we preserve the original values of dict1 when they matter? BUG: Doesn't copy, just aliases!",
     clue: "BEA",
   },
   {
@@ -224,7 +224,7 @@ print("Eighth clue:", merged["start"] + merged["middle"] + merged["end"])
     
     def try_unlock(self, attempt):
         if attempt == self.parts:
-            self.is_unlocked = False  # Bug: Should set to True
+            self.is_unlocked = False  
         return self.is_unlocked
 
 lock = CodeLock(["K", "E", "Y"])
@@ -279,15 +279,13 @@ print("The Lost Code of LEGACY:", final_message)  # Output: Garbage (as intended
     solution: `def decode_final_message(key, encrypted):
     decrypted = ""
     for i in range(len(encrypted)):
-        key_char = key[i % len(key)]  # Cycles through the key (e.g., "THEMKEY")
-        key_shift = ord(key_char) - ord('A')  # Convert key letter to shift value (0-25)
+        key_char = key[i % len(key)]  
+        key_shift = ord(key_char) - ord('A')  
         encrypted_char = encrypted[i]
         # Decrypt with wrap-around using modulo 26:
         decrypted_ord = (ord(encrypted_char) - ord('A') - key_shift) % 26 + ord('A')
         decrypted += chr(decrypted_ord)
     return decrypted
-
-# Key derived from clues: T (L2) + M (L5) + E (L7) + KEY (L9) = "THEMKEY"
 encrypted = "WKLVCODEGMXVWDKHDG"
 final_message = decode_final_message("THEMKEY", encrypted)
 print("The Lost Code of LEGACY:", final_message)  # Output: "THELEGACYCODEISHERE"`,
